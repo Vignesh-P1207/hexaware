@@ -68,8 +68,8 @@ canvas {
 /* Energy Orb */
 .energy-orb {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 240px;
+    height: 240px;
     margin-bottom: 20px;
 }
 
@@ -78,11 +78,11 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background: radial-gradient(circle, #f27e52, #e05a2a);
-    box-shadow: 0 0 40px #f27e52, 0 0 80px #f27e5288, 0 0 120px #e05a2a44;
+    box-shadow: 0 0 80px #f27e52, 0 0 160px #f27e5288, 0 0 240px #e05a2a44;
     animation: orbPulse 1.5s ease-in-out infinite;
 }
 
@@ -96,29 +96,29 @@ canvas {
 }
 
 .ring-1 {
-    width: 70px;
-    height: 70px;
-    margin-top: -35px;
-    margin-left: -35px;
+    width: 140px;
+    height: 140px;
+    margin-top: -70px;
+    margin-left: -70px;
     border-color: rgba(153, 194, 232, 0.6);
     animation-duration: 3s;
 }
 
 .ring-2 {
-    width: 95px;
-    height: 95px;
-    margin-top: -47.5px;
-    margin-left: -47.5px;
+    width: 190px;
+    height: 190px;
+    margin-top: -95px;
+    margin-left: -95px;
     border-color: rgba(15, 68, 117, 0.5);
     animation-direction: reverse;
     animation-duration: 5s;
 }
 
 .ring-3 {
-    width: 120px;
-    height: 120px;
-    margin-top: -60px;
-    margin-left: -60px;
+    width: 240px;
+    height: 240px;
+    margin-top: -120px;
+    margin-left: -120px;
     border-color: rgba(242, 126, 82, 0.2);
     animation-duration: 7s;
 }
@@ -128,12 +128,12 @@ canvas {
     0%,
     100% {
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 40px #f27e52, 0 0 80px #f27e5288;
+        box-shadow: 0 0 80px #f27e52, 0 0 160px #f27e5288;
     }
 
     50% {
         transform: translate(-50%, -50%) scale(1.2);
-        box-shadow: 0 0 60px #f27e52, 0 0 120px #f27e5288, 0 0 160px #e05a2a33;
+        box-shadow: 0 0 120px #f27e52, 0 0 240px #f27e5288, 0 0 320px #e05a2a33;
     }
 }
 

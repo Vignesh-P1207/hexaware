@@ -225,7 +225,7 @@ class HackathonReveal {
 
     async runLoadingBar() {
         const title = document.getElementById('loading-title');
-        title.textContent = 'INITIALIZING CORE ASSETS...';
+        if (title) title.textContent = 'INITIALIZING CORE ASSETS...';
         const bar = document.getElementById('loading-bar');
         const pct = document.getElementById('loading-percent');
         let progress = 0;
@@ -233,13 +233,13 @@ class HackathonReveal {
             const iv = setInterval(() => {
                 progress += Math.random() * 4 + 1;
                 if (progress >= 100) { progress = 100; clearInterval(iv); resolve(); }
-                bar.style.width = progress + '%';
-                pct.textContent = Math.floor(progress) + '%';
-                if (progress > 40 && progress < 80) title.textContent = 'ESTABLISHING CONNECTION...';
-                if (progress >= 80) title.textContent = 'SYNCING DATA...';
+                if (bar) bar.style.width = progress + '%';
+                if (pct) pct.textContent = Math.floor(progress) + '%';
+                if (title && progress > 40 && progress < 80) title.textContent = 'ESTABLISHING CONNECTION...';
+                if (title && progress >= 80) title.textContent = 'SYNCING DATA...';
             }, 50);
         });
-        title.textContent = 'SYSTEM READY.';
+        if (title) title.textContent = 'SYSTEM READY.';
         await this.sleep(400);
         this.startSequence();
     }
