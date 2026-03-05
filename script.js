@@ -269,7 +269,13 @@ class HackathonReveal {
         await this.sleep(200);
         this.switchScreen('click', 'countdown');
         this.initParticles('countdown-particles');
+        // Play the countdown audio file
+        this.countdownAudio = new Audio('audio.mp3');
+        this.countdownAudio.volume = 1;
+        this.countdownAudio.play().catch(() => { });
         await this.runCountdown();
+        // Stop countdown audio when done
+        if (this.countdownAudio) { this.countdownAudio.pause(); this.countdownAudio = null; }
         this.switchScreen('countdown', 'burst');
         this.sound.boom();
         await this.runBurst();
@@ -292,17 +298,13 @@ class HackathonReveal {
             numEl.style.animation = 'none'; void numEl.offsetWidth;
             numEl.style.animation = 'countPulse 0.8s ease-out';
             if (i <= 3) {
-                this.sound.tickUrgent();
                 numEl.style.background = 'linear-gradient(180deg,#ff6a00,#ff3d00 40%,#cc2200)';
                 numEl.style.webkitBackgroundClip = 'text'; numEl.style.backgroundClip = 'text';
                 numEl.style.filter = 'drop-shadow(0 0 60px rgba(255,50,0,.9))';
                 labelEl.style.color = 'rgba(255,106,0,.9)';
                 this.screenShake(this.screens.countdown, i);
             } else if (i <= 5) {
-                this.sound.tickUrgent();
                 numEl.style.filter = 'drop-shadow(0 0 40px rgba(255,106,0,.6))';
-            } else {
-                this.sound.tick();
             }
             await this.sleep(i <= 3 ? 650 : i <= 5 ? 800 : 900);
         }
