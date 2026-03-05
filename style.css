@@ -1,0 +1,907 @@
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0a0a14;
+    font-family: 'Rajdhani', sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ===== SCREENS ===== */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    background: #0a0a14;
+    z-index: 1;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 10;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* ===== CLICK SCREEN ===== */
+#click-screen {
+    background: radial-gradient(ellipse at center, #0d1528 0%, #070b15 60%, #030508 100%);
+}
+
+.click-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Energy Orb */
+.energy-orb {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.orb-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff6a00, #ff3d00);
+    box-shadow: 0 0 40px #ff6a00, 0 0 80px #ff450088, 0 0 120px #ff2d0044;
+    animation: orbPulse 1.5s ease-in-out infinite;
+}
+
+.orb-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 106, 0, 0.4);
+    animation: ringRotate 4s linear infinite;
+}
+
+.ring-1 {
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    margin-left: -35px;
+    border-color: rgba(255, 106, 0, 0.6);
+    animation-duration: 3s;
+}
+
+.ring-2 {
+    width: 95px;
+    height: 95px;
+    margin-top: -47.5px;
+    margin-left: -47.5px;
+    border-color: rgba(255, 80, 0, 0.3);
+    animation-direction: reverse;
+    animation-duration: 5s;
+}
+
+.ring-3 {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+    margin-left: -60px;
+    border-color: rgba(255, 60, 0, 0.15);
+    animation-duration: 7s;
+}
+
+@keyframes orbPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 40px #ff6a00, 0 0 80px #ff450088;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 0 60px #ff6a00, 0 0 120px #ff450088, 0 0 160px #ff2d0033;
+    }
+}
+
+@keyframes ringRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.click-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff6a00;
+    letter-spacing: 8px;
+    text-shadow: 0 0 20px rgba(255, 106, 0, 0.5), 0 0 40px rgba(255, 60, 0, 0.3);
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+.click-subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: subtitleFade 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 20px rgba(255, 106, 0, 0.5);
+    }
+
+    100% {
+        text-shadow: 0 0 40px rgba(255, 106, 0, 0.8), 0 0 80px rgba(255, 60, 0, 0.4);
+    }
+}
+
+@keyframes subtitleFade {
+    0% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Pulse Rings on click screen */
+.pulse-ring {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 106, 0, 0.15);
+    animation: pulseRingExpand 3s ease-out infinite;
+    z-index: 1;
+}
+
+.pulse-ring.delay-1 {
+    animation-delay: 1s;
+}
+
+.pulse-ring.delay-2 {
+    animation-delay: 2s;
+}
+
+@keyframes pulseRingExpand {
+    0% {
+        width: 200px;
+        height: 200px;
+        opacity: 0.6;
+    }
+
+    100% {
+        width: 800px;
+        height: 800px;
+        opacity: 0;
+    }
+}
+
+/* Heartbeat Line */
+.heartbeat-line {
+    width: 500px;
+    max-width: 90vw;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.heartbeat-line svg {
+    width: 100%;
+    height: 100%;
+}
+
+.heartbeat-path {
+    fill: none;
+    stroke: #ff6a00;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px #ff6a00);
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500;
+    animation: drawHeartbeat 2.5s linear infinite;
+}
+
+@keyframes drawHeartbeat {
+    0% {
+        stroke-dashoffset: 1500;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ===== COUNTDOWN SCREEN ===== */
+#countdown-screen {
+    background: radial-gradient(ellipse at center, #0d1528 0%, #070b15 60%, #030508 100%);
+}
+
+.countdown-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(14px, 2.5vw, 22px);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.countdown-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(150px, 30vw, 320px);
+    font-weight: 900;
+    color: transparent;
+    background: linear-gradient(180deg, #e8e8e8 0%, #8a8a8a 40%, #555 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(255, 106, 0, 0.3)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+    position: relative;
+    line-height: 1;
+    animation: countPulse 0.8s ease-out;
+}
+
+.countdown-unit {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(12px, 2vw, 18px);
+    font-weight: 400;
+    color: rgba(255, 106, 0, 0.6);
+    letter-spacing: 12px;
+    margin-top: 5px;
+    text-shadow: 0 0 10px rgba(255, 106, 0, 0.3);
+}
+
+@keyframes countPulse {
+    0% {
+        transform: scale(1.8);
+        opacity: 0;
+        filter: drop-shadow(0 0 60px rgba(255, 106, 0, 0.8));
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 0 30px rgba(255, 106, 0, 0.3));
+    }
+}
+
+/* Fire Bars */
+.fire-bar {
+    position: fixed;
+    top: 45%;
+    width: 40%;
+    height: 4px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.fire-bar-left {
+    left: 0;
+    background: linear-gradient(90deg, transparent 0%, #ff6a00 60%, #ffcc00 100%);
+    box-shadow: 0 0 20px #ff6a00, 0 -3px 15px #ff450066, 0 3px 15px #ff450066;
+    animation: fireBarPulse 1.5s ease-in-out infinite alternate;
+}
+
+.fire-bar-right {
+    right: 0;
+    background: linear-gradient(270deg, transparent 0%, #ff6a00 60%, #ffcc00 100%);
+    box-shadow: 0 0 20px #ff6a00, 0 -3px 15px #ff450066, 0 3px 15px #ff450066;
+    animation: fireBarPulse 1.5s ease-in-out infinite alternate;
+    animation-delay: 0.75s;
+}
+
+@keyframes fireBarPulse {
+    0% {
+        opacity: 0.4;
+        box-shadow: 0 0 10px #ff6a00;
+    }
+
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 30px #ff6a00, 0 -5px 20px #ff450088, 0 5px 20px #ff450088;
+    }
+}
+
+.heartbeat-bottom {
+    position: fixed;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 700px;
+    height: 50px;
+}
+
+.heartbeat-bottom svg {
+    width: 100%;
+    height: 100%;
+}
+
+.heartbeat-path-2 {
+    fill: none;
+    stroke: #ff6a00;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px #ff6a00) drop-shadow(0 0 16px #ff4500);
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawHeartbeat2 1.8s linear infinite;
+}
+
+@keyframes drawHeartbeat2 {
+    0% {
+        stroke-dashoffset: 2000;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ===== BURST SCREEN ===== */
+#burst-screen {
+    background: #000;
+}
+
+.flash-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #fff 0%, #ff6a00 30%, transparent 70%);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.flash-overlay.active {
+    animation: flashBurst 1.2s ease-out forwards;
+}
+
+@keyframes flashBurst {
+    0% {
+        opacity: 1;
+        transform: scale(0.3);
+    }
+
+    15% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+/* Debris */
+.debris-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.debris {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--size);
+    height: var(--size);
+    background: var(--color);
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--color);
+}
+
+.debris.animate {
+    animation: debrisFly var(--duration) ease-out forwards;
+}
+
+@keyframes debrisFly {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(-50% + var(--tx)),
+                calc(-50% + var(--ty))) rotate(var(--rot));
+        opacity: 0;
+    }
+}
+
+/* ===== ASSEMBLE SCREEN (Logo flying in) ===== */
+#assemble-screen {
+    background: radial-gradient(ellipse at center, #0a1225 0%, #060b18 60%, #030508 100%);
+}
+
+.assemble-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.assemble-logo {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.assemble-logo.visible {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.rit-logo-assemble {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 30px rgba(100, 180, 255, 0.6)) drop-shadow(0 0 60px rgba(100, 180, 255, 0.3));
+}
+
+.assemble-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.assemble-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.assemble-rit {
+    font-family: 'Exo 2', sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 6px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.assemble-inst {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(14px, 2.5vw, 22px);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 6px;
+}
+
+.assemble-presents {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: 600;
+    color: #ff6a00;
+    letter-spacing: 8px;
+    margin-top: 18px;
+    text-shadow: 0 0 15px rgba(255, 106, 0, 0.5), 0 0 30px rgba(255, 60, 0, 0.3);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.assemble-presents.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== REVEAL SCREEN ===== */
+#reveal-screen {
+    background: linear-gradient(180deg, #060b18 0%, #0a1428 50%, #081020 100%);
+    overflow: hidden;
+}
+
+.reveal-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-container.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.rit-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 15px rgba(100, 180, 255, 0.5));
+    animation: logoGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(100, 180, 255, 0.5));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 30px rgba(100, 200, 255, 0.8)) drop-shadow(0 0 60px rgba(100, 200, 255, 0.3));
+    }
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.logo-rit {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.logo-institute {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 4px;
+}
+
+/* Hackathon Title */
+.hackathon-title {
+    opacity: 0;
+    transform: scale(0.3) rotateX(40deg);
+    transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 20px;
+}
+
+.hackathon-title.visible {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+}
+
+.neon-border {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 28px 55px;
+    border: 2px solid rgba(0, 200, 255, 0.4);
+    border-radius: 12px;
+    position: relative;
+    background: rgba(0, 20, 60, 0.4);
+    box-shadow:
+        0 0 20px rgba(0, 200, 255, 0.15),
+        inset 0 0 30px rgba(0, 100, 200, 0.05),
+        0 0 60px rgba(0, 150, 255, 0.1);
+    animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% {
+        box-shadow:
+            0 0 20px rgba(0, 200, 255, 0.15),
+            inset 0 0 30px rgba(0, 100, 200, 0.05),
+            0 0 60px rgba(0, 150, 255, 0.1);
+        border-color: rgba(0, 200, 255, 0.4);
+    }
+
+    100% {
+        box-shadow:
+            0 0 40px rgba(0, 200, 255, 0.3),
+            inset 0 0 40px rgba(0, 100, 200, 0.1),
+            0 0 100px rgba(0, 150, 255, 0.2);
+        border-color: rgba(0, 220, 255, 0.7);
+    }
+}
+
+.hack-text-line1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(20px, 4vw, 32px);
+    font-weight: 600;
+    color: #00d4ff;
+    letter-spacing: 6px;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+.hack-text-line2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 800;
+    color: #ff6a00;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(255, 106, 0, 0.6), 0 0 40px rgba(255, 60, 0, 0.3);
+}
+
+.hack-text-line3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 900;
+    background: linear-gradient(90deg, #00d4ff, #00ff88, #00d4ff);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 5px;
+    animation: gradientShift 3s linear infinite;
+    text-shadow: none;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.4));
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Quote Section */
+.quote-section {
+    margin-top: 28px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    max-width: 650px;
+}
+
+.quote-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote-mark {
+    font-family: 'Georgia', serif;
+    font-size: 60px;
+    color: rgba(255, 106, 0, 0.4);
+    line-height: 0.5;
+    display: inline-block;
+}
+
+.quote-mark.close {
+    text-align: right;
+    display: block;
+}
+
+.quote-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+    line-height: 1.6;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+}
+
+.quote-author {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(11px, 1.8vw, 16px);
+    font-weight: 600;
+    color: #00d4ff;
+    letter-spacing: 4px;
+    margin-top: 12px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+    animation: authorBlink 2s ease-in-out infinite alternate;
+}
+
+@keyframes authorBlink {
+    0% {
+        opacity: 0.6;
+        text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    }
+
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 25px rgba(0, 212, 255, 0.7), 0 0 50px rgba(0, 212, 255, 0.3);
+    }
+}
+
+/* Energy Lines */
+.energy-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.e-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(255, 106, 0, 0.08), transparent);
+    height: 1px;
+    width: 100%;
+    animation: energyMove 8s linear infinite;
+}
+
+.line-1 {
+    top: 20%;
+    animation-delay: 0s;
+}
+
+.line-2 {
+    top: 40%;
+    animation-delay: 2s;
+}
+
+.line-3 {
+    top: 60%;
+    animation-delay: 4s;
+}
+
+.line-4 {
+    top: 80%;
+    animation-delay: 6s;
+}
+
+@keyframes energyMove {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .energy-orb {
+        width: 80px;
+        height: 80px;
+    }
+
+    .orb-core {
+        width: 25px;
+        height: 25px;
+    }
+
+    .ring-1 {
+        width: 45px;
+        height: 45px;
+        margin-top: -22.5px;
+        margin-left: -22.5px;
+    }
+
+    .ring-2 {
+        width: 62px;
+        height: 62px;
+        margin-top: -31px;
+        margin-left: -31px;
+    }
+
+    .ring-3 {
+        width: 80px;
+        height: 80px;
+        margin-top: -40px;
+        margin-left: -40px;
+    }
+
+    .click-title {
+        font-size: 20px;
+        letter-spacing: 4px;
+    }
+
+    .neon-border {
+        padding: 18px 25px;
+    }
+
+    .rit-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .rit-logo-assemble {
+        width: 100px;
+        height: 100px;
+    }
+
+    .logo-rit {
+        font-size: 18px;
+    }
+
+    .logo-institute {
+        font-size: 12px;
+    }
+
+    .fire-bar {
+        width: 30%;
+    }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHESHIBES HEXAWARE-RIT Hackathon</title>
+    <meta name="description"
+        content="SHESHIBES HEXAWARE-RIT Hackathon Open - Rajalakshmi Institute of Technology Coding Challenge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Initial Click Prompt Screen -->
+    <div id="click-screen" class="screen active">
+        <canvas id="particle-canvas"></canvas>
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring delay-1"></div>
+        <div class="pulse-ring delay-2"></div>
+        <div class="click-content">
+            <div class="energy-orb">
+                <div class="orb-core"></div>
+                <div class="orb-ring ring-1"></div>
+                <div class="orb-ring ring-2"></div>
+                <div class="orb-ring ring-3"></div>
+            </div>
+            <h2 class="click-title">THE SHOW BEGINS IN</h2>
+            <p class="click-subtitle">Click anywhere to start the countdown</p>
+            <div class="heartbeat-line">
+                <svg viewBox="0 0 600 60" preserveAspectRatio="none">
+                    <polyline class="heartbeat-path"
+                        points="0,30 100,30 120,30 130,5 140,55 150,30 170,30 200,30 220,30 230,5 240,55 250,30 270,30 300,30 320,30 330,5 340,55 350,30 370,30 400,30 420,30 430,5 440,55 450,30 470,30 600,30" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Screen -->
+    <div id="countdown-screen" class="screen">
+        <canvas id="countdown-particles"></canvas>
+        <div class="countdown-container">
+            <div class="countdown-label" id="countdown-label">THE SHOW STARTS IN</div>
+            <div id="countdown-number" class="countdown-number">10</div>
+            <div class="countdown-unit" id="countdown-unit">SECONDS</div>
+            <div class="heartbeat-bottom">
+                <svg viewBox="0 0 800 60" preserveAspectRatio="none">
+                    <polyline class="heartbeat-path-2"
+                        points="0,30 100,30 120,30 130,5 140,55 150,30 170,30 250,30 270,30 280,5 290,55 300,30 320,30 400,30 420,30 430,5 440,55 450,30 470,30 550,30 570,30 580,5 590,55 600,30 620,30 800,30" />
+                </svg>
+            </div>
+        </div>
+        <!-- Fire bars on left and right -->
+        <div class="fire-bar fire-bar-left"></div>
+        <div class="fire-bar fire-bar-right"></div>
+    </div>
+
+    <!-- Explosion/Burst Screen -->
+    <div id="burst-screen" class="screen">
+        <canvas id="burst-canvas"></canvas>
+        <div id="flash-overlay" class="flash-overlay"></div>
+        <div id="debris-container" class="debris-container"></div>
+    </div>
+
+    <!-- Logo Assemble Screen (tech pieces flying in) -->
+    <div id="assemble-screen" class="screen">
+        <canvas id="assemble-canvas"></canvas>
+        <div class="assemble-content">
+            <div class="assemble-logo" id="assemble-logo">
+                <img src="rit_logo.png" alt="RIT Logo" class="rit-logo-assemble">
+            </div>
+            <div class="assemble-text" id="assemble-text">
+                <span class="assemble-rit">RAJALAKSHMI</span>
+                <span class="assemble-inst">INSTITUTE OF TECHNOLOGY</span>
+                <span class="assemble-presents" id="assemble-presents">— PRESENTS —</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Reveal Screen -->
+    <div id="reveal-screen" class="screen">
+        <canvas id="reveal-particles"></canvas>
+        <div class="reveal-content">
+            <div class="logo-container" id="logo-container">
+                <img src="rit_logo.png" alt="RIT Logo" class="rit-logo">
+                <div class="logo-text">
+                    <span class="logo-rit">RAJALAKSHMI</span>
+                    <span class="logo-institute">INSTITUTE OF TECHNOLOGY</span>
+                </div>
+            </div>
+            <div class="hackathon-title" id="hackathon-title">
+                <div class="neon-border">
+                    <span class="hack-text-line1">SHESHIBES</span>
+                    <span class="hack-text-line2">HEXAWARE-RIT</span>
+                    <span class="hack-text-line3">HACKATHON OPEN</span>
+                </div>
+            </div>
+            <div class="quote-section" id="quote-section">
+                <div class="quote-mark">&ldquo;</div>
+                <p class="quote-text">The best way to predict the future is to invent it.</p>
+                <div class="quote-mark close">&rdquo;</div>
+                <p class="quote-author">— CODING CHALLENGE IS NOW OPEN —</p>
+            </div>
+            <div class="energy-lines">
+                <div class="e-line line-1"></div>
+                <div class="e-line line-2"></div>
+                <div class="e-line line-3"></div>
+                <div class="e-line line-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio effects (Web Audio API driven, no files needed) -->
+    <script src="script.js"></script>
+</body>
+
+</html>
