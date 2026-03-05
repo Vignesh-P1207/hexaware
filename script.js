@@ -218,9 +218,30 @@ class HackathonReveal {
             if (!this.isStarted) {
                 this.isStarted = true;
                 this.sound.init();
-                this.startSequence();
+                this.runLoadingBar();
             }
         });
+    }
+
+    async runLoadingBar() {
+        const title = document.getElementById('loading-title');
+        title.textContent = 'INITIALIZING CORE ASSETS...';
+        const bar = document.getElementById('loading-bar');
+        const pct = document.getElementById('loading-percent');
+        let progress = 0;
+        await new Promise(resolve => {
+            const iv = setInterval(() => {
+                progress += Math.random() * 4 + 1;
+                if (progress >= 100) { progress = 100; clearInterval(iv); resolve(); }
+                bar.style.width = progress + '%';
+                pct.textContent = Math.floor(progress) + '%';
+                if (progress > 40 && progress < 80) title.textContent = 'ESTABLISHING CONNECTION...';
+                if (progress >= 80) title.textContent = 'SYNCING DATA...';
+            }, 50);
+        });
+        title.textContent = 'SYSTEM READY.';
+        await this.sleep(400);
+        this.startSequence();
     }
 
     initParticles(canvasId) {
@@ -243,7 +264,7 @@ class HackathonReveal {
                 if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
                 if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
                 ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255,106,0,${p.alpha})`; ctx.fill();
+                ctx.fillStyle = `rgba(153,194,232,${p.alpha})`; ctx.fill();
             });
             for (let i = 0; i < particles.length; i++) for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
@@ -251,7 +272,7 @@ class HackathonReveal {
                 if (dist < 100) {
                     ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(255,106,0,${.06 * (1 - dist / 100)})`; ctx.lineWidth = .5; ctx.stroke();
+                    ctx.strokeStyle = `rgba(153,194,232,${.06 * (1 - dist / 100)})`; ctx.lineWidth = .5; ctx.stroke();
                 }
             }
             requestAnimationFrame(animate);
@@ -333,7 +354,7 @@ class HackathonReveal {
         const cx = canvas.width / 2, cy = canvas.height / 2;
         document.getElementById('flash-overlay').classList.add('active');
         this.createDebris();
-        const parts = [], colors = ['#ff6a00', '#ff3d00', '#ff9500', '#ffcc00', '#00d4ff', '#fff', '#ff2200'];
+        const parts = [], colors = ['#f27e52', '#e05a2a', '#99c2e8', '#0f4475', '#fff', '#ffcc00', '#f27e52'];
         for (let i = 0; i < 180; i++) {
             const a = (Math.PI * 2 / 180) * i + (Math.random() - .5) * .5, s = Math.random() * 8 + 3;
             parts.push({
@@ -347,9 +368,9 @@ class HackathonReveal {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (shockA > 0) {
                 ctx.beginPath(); ctx.arc(cx, cy, shockR, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(255,106,0,${shockA})`; ctx.lineWidth = 3; ctx.stroke();
+                ctx.strokeStyle = `rgba(242,126,82,${shockA})`; ctx.lineWidth = 3; ctx.stroke();
                 ctx.beginPath(); ctx.arc(cx, cy, shockR * .7, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(0,212,255,${shockA * .4})`; ctx.lineWidth = 2; ctx.stroke();
+                ctx.strokeStyle = `rgba(153,194,232,${shockA * .4})`; ctx.lineWidth = 2; ctx.stroke();
                 shockR += 14; shockA -= .025;
             }
             parts.forEach(p => {
@@ -373,7 +394,7 @@ class HackathonReveal {
 
     createDebris() {
         const c = document.getElementById('debris-container'); c.innerHTML = '';
-        const cols = ['#ff6a00', '#ff3d00', '#ffcc00', '#00d4ff', '#888', '#444'];
+        const cols = ['#f27e52', '#e05a2a', '#99c2e8', '#0f4475', '#fff', '#ffcc00'];
         for (let i = 0; i < 35; i++) {
             const el = document.createElement('div'); el.classList.add('debris');
             const a = Math.random() * Math.PI * 2, d = Math.random() * 500 + 200;

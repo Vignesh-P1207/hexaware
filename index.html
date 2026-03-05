@@ -29,8 +29,13 @@
                 <div class="orb-ring ring-2"></div>
                 <div class="orb-ring ring-3"></div>
             </div>
-            <h2 class="click-title">THE SHOW BEGINS IN</h2>
-            <p class="click-subtitle">Click anywhere to start the countdown</p>
+            <h2 class="click-title" id="loading-title">SYSTEM STANDBY</h2>
+            <div class="loading-bar-container">
+                <div class="loading-bar-track">
+                    <div class="loading-bar-fill" id="loading-bar"></div>
+                </div>
+                <span class="loading-percent" id="loading-percent">0%</span>
+            </div>
             <div class="heartbeat-line">
                 <svg viewBox="0 0 600 60" preserveAspectRatio="none">
                     <polyline class="heartbeat-path"
