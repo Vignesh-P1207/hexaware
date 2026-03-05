@@ -71,6 +71,11 @@ canvas {
     width: 240px;
     height: 240px;
     margin-bottom: 20px;
+    transition: transform 0.1s ease;
+}
+
+.energy-orb:active {
+    transform: scale(0.9);
 }
 
 .orb-core {

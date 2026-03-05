@@ -218,7 +218,7 @@ class HackathonReveal {
             if (!this.isStarted) {
                 this.isStarted = true;
                 this.sound.init();
-                this.runLoadingBar();
+                this.startSequence();
             }
         });
     }
@@ -287,7 +287,6 @@ class HackathonReveal {
     }
 
     async startSequence() {
-        await this.sleep(200);
         this.switchScreen('click', 'countdown');
         this.initParticles('countdown-particles');
         // Play the countdown audio file
