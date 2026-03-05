@@ -580,21 +580,56 @@ canvas {
     transform: translateY(0);
 }
 
-.assemble-rit {
-    font-family: 'Exo 2', sans-serif;
-    font-size: clamp(28px, 5vw, 44px);
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 6px;
-    text-shadow: 0 0 20px rgba(153, 194, 232, 0.5);
+/* New Assemble Logo Styles */
+.assemble-version.new-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.assemble-inst {
+.assemble-version .new-logo-rit-text {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    position: relative;
+    letter-spacing: -2px;
+}
+
+
+
+.assemble-version .new-logo-divider {
+    width: 4px;
+    height: 80px;
+    background-color: #f27e52;
+    margin: 0 10px;
+}
+
+.assemble-version .new-logo-full-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    line-height: 1.1;
+}
+
+.assemble-version .text-rajalakshmi {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(153, 194, 232, 0.5);
+}
+
+.assemble-version .text-institute,
+.assemble-version .text-technology {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(14px, 2.5vw, 22px);
-    font-weight: 500;
-    color: rgba(153, 194, 232, 0.7);
-    letter-spacing: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(153, 194, 232, 0.8);
+    letter-spacing: 4px;
 }
 
 .assemble-presents {
@@ -665,26 +700,55 @@ canvas {
     }
 }
 
-.logo-text {
+/* New Reveal Logo Styles */
+.reveal-version.new-logo-wrapper {
     display: flex;
-    flex-direction: column;
-    text-align: left;
+    align-items: center;
+    gap: 15px;
 }
 
-.logo-rit {
+.reveal-version .new-logo-rit-text {
     font-family: 'Exo 2', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 50px;
+    font-weight: 800;
     color: #fff;
-    letter-spacing: 3px;
+    line-height: 1;
+    position: relative;
+    letter-spacing: -2px;
+}
+
+
+
+.reveal-version .new-logo-divider {
+    width: 3px;
+    height: 50px;
+    background-color: #f27e52;
+    margin: 0 5px;
+}
+
+.reveal-version .new-logo-full-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    line-height: 1.1;
+}
+
+.reveal-version .text-rajalakshmi {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(153, 194, 232, 0.4);
 }
 
-.logo-institute {
+.reveal-version .text-institute,
+.reveal-version .text-technology {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: rgba(153, 194, 232, 0.7);
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(153, 194, 232, 0.8);
     letter-spacing: 4px;
 }
 
